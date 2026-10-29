@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hospital Emergency Management System — interactive max-heap and priority queue DSA demonstration.">
+  <title>Hospital Emergency Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">✚</div>
+    <div class="brand-copy">
+      <h1>Hospital Emergency Management</h1>
+      <p>Priority Queue · Max-Heap Demonstration</p>
+    </div>
+    <span class="tag">DSA PROJECT</span>
+  </header>
+
+  <main class="container">
+    <div class="notice"><strong>Demo only:</strong> This is an educational DSA simulation, not a real patient-record or triage system.</div>
+    <section class="stats" aria-label="System statistics">
+      <article class="stat"><span>WAITING PATIENTS</span><strong id="waitingCount">0</strong></article>
+      <article class="stat"><span>NEXT PRIORITY</span><strong id="nextPriority">—</strong></article>
+      <article class="stat"><span>PROCESSED</span><strong id="processedCount">0</strong></article>
+    </section>
+
+    <section class="main-grid">
+      <article class="card">
+        <div class="card-heading"><div><p class="eyebrow">PATIENT INTAKE</p><h2>Register patient</h2></div><span class="heading-icon">＋</span></div>
+        <form id="patientForm">
+          <label for="patientId">Patient ID</label>
+          <input id="patientId" placeholder="e.g. P105" maxlength="20" required>
+          <label for="patientName">Patient name</label>
+          <input id="patientName" placeholder="Enter full name" maxlength="70" required>
+          <div class="form-row">
+            <div><label for="patientAge">Age</label><input id="patientAge" type="number" min="0" max="120" placeholder="Age" required></div>
+            <div><label for="patientPriority">Priority</label>
+              <select id="patientPriority">
+                <option value="4">4 — Critical</option>
+                <option value="3">3 — Urgent</option>
+                <option value="2" selected>2 — Moderate</option>
+                <option value="1">1 — Stable</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">＋ Add patient</button>
+        </form>
+        <div class="action-grid">
+          <button class="btn btn-soft" id="viewNext">View next</button>
+          <button class="btn btn-danger" id="processPatient">Process patient</button>
+          <button class="btn btn-soft" id="searchPatient">Search ID</button>
+          <button class="btn btn-soft" id="loadSamples">Load samples</button>
+          <button class="btn btn-quiet full" id="resetSystem">Reset demo</button>
+        </div>
+        <div id="message" class="message" role="status" aria-live="polite">Welcome! Add a patient or load sample patients.</div>
+      </article>
+
+      <article class="card heap-card">
+        <div class="card-heading"><div><p class="eyebrow">LIVE STRUCTURE</p><h2>Max-Heap</h2></div><span class="heading-icon">⌘</span></div>
+        <p class="subtext">The root contains the highest-priority waiting patient. Equal priorities are handled in arrival order.</p>
+        <div id="heapTree" class="heap-tree"><p class="empty-state">No patients waiting yet.</p></div>
+        <div class="heap-details">
+          <h3>Array representation</h3>
+          <code id="heapArray">[]</code>
+          <p class="formula">Parent = (i − 1) / 2 · Left = 2i + 1 · Right = 2i + 2</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="lower-grid">
+      <article class="card">
+        <div class="card-heading"><div><p class="eyebrow">QUEUE OVERVIEW</p><h2>Waiting list</h2></div></div>
+        <div class="table-wrap"><table><thead><tr><th>Patient</th><th>Age</th><th>Priority</th><th>Arrival</th></tr></thead><tbody id="waitingTable"><tr><td colspan="4" class="table-empty">No patients in queue.</td></tr></tbody></table></div>
+      </article>
+      <article class="card">
+        <div class="card-heading"><div><p class="eyebrow">TRACE</p><h2>Operation log</h2></div><button id="clearLog" class="text-button">Clear log</button></div>
+        <ol id="operationLog" class="log-list"><li>System ready.</li></ol>
+      </article>
+    </section>
+    <footer>Hospital Emergency Management System · Built as a browser-based DSA demonstration</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
